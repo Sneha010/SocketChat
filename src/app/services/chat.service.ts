@@ -7,8 +7,8 @@ export class ChatService {
     private url = 'http://localhost:8000';
     private socket: any;
 
-    sendMessage(message: string) {
-        this.socket.emit('add-message', message);
+    sendMessage(message: string, username: string) {
+        this.socket.emit('add-message', message, username);
     }
 
     getMessages() {
@@ -23,6 +23,15 @@ export class ChatService {
             }
         });
         return observable;
+    }
+
+    getUsername() {
+        return sessionStorage.getItem('username');
+    }
+
+    setUsername(username: string) {
+        console.log('Username is set : ' + username);
+        sessionStorage.setItem('username', username);
     }
 
 }
